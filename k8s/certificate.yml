@@ -1,0 +1,14 @@
+# details about the certificate needed
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ecmatrials-com-tls
+spec:
+  secretName: ecmatrials-com # reference to the secret that is created
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: ecmatrials.com # name that is displayed on the certificate
+  dnsNames:
+    - ecmatrials.com
+    - www.ecmatrials.com # domains associated with this certificate
