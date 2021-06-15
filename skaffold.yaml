@@ -3,18 +3,19 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - ./k8s/client-deployment.yml
-      - ./k8s/server-deployment.yml
-      - ./k8s/worker-deployment.yml
-      - ./k8s/database-persistent-volume-claim.yml
-      - ./k8s/ingress-service.yml
-      - ./k8s/postgres-cluster-ip-service.yml
-      - ./k8s/postgres-deployment.yml
-      - ./k8s/redis-cluster-ip-service.yml
-      - ./k8s/redis-deployment.yml
-      - ./k8s/worker-deployment.yml
-      - ./k8s/server-cluster-ip-service.yml
-      - ./k8s/client-cluster-ip-service.yml
+      - ./k8s-dev/*
+      # - ./k8s/client-deployment.yml
+      # - ./k8s/server-deployment.yml
+      # - ./k8s/worker-deployment.yml
+      # - ./k8s/database-persistent-volume-claim.yml
+      # - ./k8s/ingress-service.yml
+      # - ./k8s/postgres-cluster-ip-service.yml
+      # - ./k8s/postgres-deployment.yml
+      # - ./k8s/redis-cluster-ip-service.yml
+      # - ./k8s/redis-deployment.yml
+      # - ./k8s/worker-deployment.yml
+      # - ./k8s/server-cluster-ip-service.yml
+      # - ./k8s/client-cluster-ip-service.yml
 build:
   local:
     push: false

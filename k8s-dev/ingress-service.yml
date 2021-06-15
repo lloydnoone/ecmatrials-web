@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod" # tell ingress to use https
+    # nginx.ingress.kubernetes.io/ssl-redirect: 'true' # redirect from http to https
+spec:
+  tls:
+    - hosts:
+        - ecmatrials.com
+        - www.ecmatrials.com
+      secretName: ecmatrials-com
+  rules:
+    - host: ecmatrials.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: client-cluster-ip-service
+                port:
+                  number: 3000
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip-service
+                port:
+                  number: 5000
+    - host: www.ecmatrials.com # second block for www
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: client-cluster-ip-service
+                port:
+                  number: 3000
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip-service
+                port:
+                  number: 5000

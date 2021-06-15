@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: client-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: web # label that the deployment looks for
+  template:
+    metadata:
+      labels:
+        component: web # only web here but could have multiple that this deployment doesnt need
+    spec:
+      containers:
+        - name: client
+          image: spoonobi/multi-client
+          ports:
+            - containerPort: 3000 # on the image
