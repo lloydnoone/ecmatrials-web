@@ -42,9 +42,9 @@ export class TestController extends Controller {
       }`)
 
       if (testFunction()) {
-        res.status(200).send('Test passed')
+        res.status(200).send({ message: 'Test passed' })
       } else {
-        res.status(200).send('Test failed')
+        res.status(200).send({ message: 'Test failed' })
       }
     } catch (err) {
       res.status(422).send({ message: 'invalid JS.', 
