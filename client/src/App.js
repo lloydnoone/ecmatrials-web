@@ -12,7 +12,7 @@ function App() {
         <header className="App-header">
           <Link to='/'>Home</Link>
           <Link to='/otherpage'>Other Page</Link>
-          <h1>debug tests on skaffold again</h1>
+          <h1>debug tests on skaffold</h1>
           <img src={logo} className="App-logo" alt="logo" />
           <a
             className="App-link"
