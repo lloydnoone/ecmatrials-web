@@ -20,7 +20,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: spoonobi/client-skaffold
+    - image: spoonobi/multi-client
       context: client
       docker:
         dockerfile: Dockerfile.dev
@@ -34,7 +34,7 @@ build:
             dest: .
           - src: "src/**/*.html"
             dest: .
-    - image: spoonobi/worker-skaffold
+    - image: spoonobi/multi-worker
       context: worker
       docker:
         dockerfile: Dockerfile.dev
@@ -44,7 +44,7 @@ build:
             dest: .
           - src: "*.ts"
             dest: .
-    - image: spoonobi/server-skaffold
+    - image: spoonobi/multi-server
       context: server
       docker:
         dockerfile: Dockerfile.dev
