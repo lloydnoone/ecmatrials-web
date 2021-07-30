@@ -46,8 +46,10 @@ export class TestController extends Controller {
       } else {
         res.status(200).send({ message: 'Test failed' })
       }
+      // any errors in the users code will br thrown as an actual error here
+      // however we still want respond normally to the client with 200 and their error msg
     } catch (err) {
-      res.status(422).send({ message: 'invalid JS.', 
+      res.status(200).send({ message: 'invalid JS.', 
       error: { 
         message: err.message,
         name: err.name,
