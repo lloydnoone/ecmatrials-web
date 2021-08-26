@@ -35,16 +35,24 @@ export class TestController extends Controller {
 
       module.exports = function() {
         if(testvar === 1) {
-          return true
+          const results = {pass: true, testvar: testvar}
+          return results
         } else {
-          return false
+          const results = {pass: false, testvar: testvar}
+          return results
         }
       }`)
 
-      if (testFunction()) {
+      if (testFunction().pass) {
         res.status(200).send({ message: 'Test passed' })
       } else {
-        res.status(200).send({ message: 'Test failed' })
+        res.status(200).send({ message: 'Test failed',
+        error: { 
+          message: `testvar = ${testFunction().testvar}, should be 1`,
+          name: 'Incorrect',
+          stack: '',
+          lineNumber: 0
+        }})
       }
       // any errors in the users code will br thrown as an actual error here
       // however we still want respond normally to the client with 200 and their error msg
@@ -53,7 +61,8 @@ export class TestController extends Controller {
       error: { 
         message: err.message,
         name: err.name,
-        stack: err.stack
+        stack: err.stack,
+        lineNumber: err.stack.split('\n')[0].replace('vm.js:','')
       }})
     }
   }
